@@ -1,9 +1,9 @@
-const compaigns = require('./dataStore.js')
+const compaignService = require('./services/compaignService')
 const express = require('express')
 const validateCompaign = require('./models/Compaign.js')
 const app = express()
 app.use(express.json())
-console.log(compaigns)
+
 app.get('/', (req, res) => {
     res.send('Hellow world')
 })
@@ -18,29 +18,38 @@ app.get('/api/compaigns', (req, res) => {
 
 app.post('/api/compaigns', (req, res) => {
     const { error } = validateCompaign(req.body)
+
     if (error) return res.status(404).send(error.details[0].message)
-    const exist = compaigns.find(c => c.name === req.body.name)
+
+    const exist = compaignService.find(req.body.name)
+
     if (exist) return res.status(400).send('The compaign with the given Name already exists.')
-    const compaign = req.body
-    compaigns.push(compaign)
-    res.send(compaign)
+
+    compaignService.add(req.body)
+
+    res.send.status(200).message('Created successfully')
 })
 app.get('/api/compaigns/:name', (req, res) => {
-    const compaign = compaigns.find(c => c.name === req.params.name)
+
+    const compaign = compaignService.find(req.params.name)
+
     if (!compaign) return res.status(404).send('The compaign with the given Name was not found.')
+
     res.send(compaign)
 
 })
 app.put('/api/compaigns/:name', (req, res) => {
-    const compaign = compaigns.find(c => c.name === req.params.name)
+
+    const compaign = compaignService.find(req.params.name)
+
     if (!compaign) return res.status(404).send('The compaign with the given Name was not found.')
 
     const { error } = validateCompaign(req.body)
+
     if (error) return res.status(400).send(error.details[0].message)
 
+    compaignService.update(compaign, req.body)
 
-
-    compaign.name = req.body.name
     res.send(compaign)
 })
 app.delete('/api/compaigns/:name', (req, res) => {
