@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.17.0",
     "joi": "^14.3.1",
+    "joi-data-model": "^1.2.1",
     "request": "^2.88.0"
   },
   "devDependencies": {

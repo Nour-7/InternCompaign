@@ -1,26 +1,9 @@
-
+const compaigns = require('./dataStore.js')
 const express = require('express')
 const validateCompaign = require('./models/Compaign.js')
-
 const app = express()
-
 app.use(express.json())
-
-const compaigns = [
-    {
-        name: 'sd',
-        id: 3,
-        kjhn: 3
-    },
-    {
-        name: 'ss',
-        id: 2
-    },
-    {
-        name: 'sf',
-        id: 1
-    }
-]
+console.log(compaigns)
 app.get('/', (req, res) => {
     res.send('Hellow world')
 })
