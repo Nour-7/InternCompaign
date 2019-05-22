@@ -1,6 +1,7 @@
 
 const joi = require('joi')
 const request = require('request')
+
 function validateCompaign(compaign) {
 
     const schema = {
