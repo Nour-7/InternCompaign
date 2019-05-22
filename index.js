@@ -1,6 +1,7 @@
-const joi = require('joi')
-const request = require('request');
+
 const express = require('express')
+const validateCompaign = require('./models/Compaign.js')
+
 const app = express()
 
 app.use(express.json())
@@ -68,28 +69,6 @@ app.delete('/api/compaigns/:name', (req, res) => {
     res.send(compaign)
 })
 
-
-function validateCompaign(compaign) {
-
-    const schema = {
-        name: joi.string().min(2).required(),
-        country: joi.string().min(2).required(),
-        budget: joi.number().valid(149, 399, 999).required(),
-        goal: joi.string().min(2).required(),
-        category: joi.string(),
-    }
-    const result = joi.validate(compaign, schema)
-    if (!compaign.category) {
-        request.get(`https://ngkc0vhbrl.execute-api.eu-west-1.amazonaws.com/api/?url=https://${compaign.name}.com/`, (error, response, body) => {
-            if (error) {
-                return console.dir(error);
-            }
-            console.dir(JSON.parse(body));
-        })
-    }
-
-    return result
-}
 
 const port = process.env.port || 3000
 app.listen(3000, () => console.log(`Lestening on port ${port} ...`))
