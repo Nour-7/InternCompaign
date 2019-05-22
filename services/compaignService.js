@@ -8,7 +8,8 @@ module.exports = {
     return compaigns.find(c => c.name === name);
   },
   update(compaign, newCompaign) {
-    compaign = newCompaign;
+    const index = compaigns.indexOf(compaign);
+    compaigns[index] = newCompaign;
   },
   getAll() {
     return compaigns;

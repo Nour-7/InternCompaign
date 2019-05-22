@@ -1,57 +1,18 @@
 const express = require('express');
-const compaignService = require('./services/compaignService');
-const validateCompaign = require('./models/Compaign.js');
+const compaignController = require('./controller/compaignController');
 
 const app = express();
 app.use(express.json());
 
-app.get('/api/compaigns', (req, res) => {
-  const compaigns = compaignService.getAll();
-  res.send(compaigns);
-});
+app.get('/api/compaigns', compaignController.getAll);
 
-app.post('/api/compaigns', (req, res) => {
-  const { error } = validateCompaign(req.body);
+app.post('/api/compaigns', compaignController.add);
 
-  if (error) return res.status(404).send(error.details[0].message);
+app.get('/api/compaigns/:name', compaignController.getByName);
 
-  const exist = compaignService.find(req.body.name);
+app.put('/api/compaigns/:name', compaignController.update);
 
-  if (exist) return res.status(400).send('The compaign with the given Name already exists.');
-
-  compaignService.add(req.body);
-
-  res.send.status(200).message('Created successfully');
-});
-app.get('/api/compaigns/:name', (req, res) => {
-  const compaign = compaignService.find(req.params.name);
-
-  if (!compaign) return res.status(404).send('The compaign with the given Name was not found.');
-
-  res.send(compaign);
-});
-app.put('/api/compaigns/:name', (req, res) => {
-  const compaign = compaignService.find(req.params.name);
-
-  if (!compaign) return res.status(404).send('The compaign with the given Name was not found.');
-
-  const { error } = validateCompaign(req.body);
-
-  if (error) return res.status(400).send(error.details[0].message);
-
-  compaignService.update(compaign, req.body);
-
-  res.send(compaign);
-});
-app.delete('/api/compaigns/:name', (req, res) => {
-  const compaign = compaignService.find(req.params.name);
-
-  if (!compaign) return res.status(404).send('The compaign with the given Name was not found.');
-
-  compaignService.delete(compaign);
-
-  res.send.status(200);
-});
+app.delete('/api/compaigns/:name', compaignController.delete);
 
 
 const port = process.env.port || 3000;
