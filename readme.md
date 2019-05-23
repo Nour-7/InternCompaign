@@ -2,6 +2,27 @@
 ----
     This a restful API with a MVC model, also it comes with basic dataset included, and provied report endpoint with chart.
 
+# Get the latest snapshot
+git clone https://github.com/Nour-7/InternCompaign.git myproject
+
+# Change directory
+cd myproject
+
+# Install NPM dependencies
+npm install
+
+# Then simply start your app
+node app.js
+
+# For testing
+npm test
+
+# For Linting
+npm run lint
+
+```
+```
+
 * **URL**
 
   http://localhost:3000
