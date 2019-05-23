@@ -7,7 +7,6 @@ function groupBy(xs, key) {
   }, {});
 }
 
-
 exports.getReportData = (req, res) => {
   const compaigns = compaignService.getAll();
 
