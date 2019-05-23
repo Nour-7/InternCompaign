@@ -1,13 +1,15 @@
 const compaignService = require('../services/compaignService');
 const validateCompaign = require('../models/Compaign.js');
 
-
+// Return ALL compaigns data
 exports.getAll = (req, res) => {
   const compaigns = compaignService.getAll();
 
   res.send(compaigns);
 };
 
+// Add new compaign Data
+// Assuming that compaign name is unique
 exports.add = (req, res) => {
   const { error } = validateCompaign(req.body);
 
@@ -22,6 +24,7 @@ exports.add = (req, res) => {
   res.status(200).send('Created successfully');
 };
 
+// Return specific compaign data according to name
 exports.getByName = (req, res) => {
   const compaign = compaignService.find(req.params.name);
 
@@ -29,6 +32,8 @@ exports.getByName = (req, res) => {
 
   res.send(compaign);
 };
+
+// Update specific compaign data with new data provided in req body
 exports.update = (req, res) => {
   const compaign = compaignService.find(req.params.name);
 
@@ -42,6 +47,8 @@ exports.update = (req, res) => {
 
   res.status(200).send('Updated successfully');
 };
+
+// Delete specific compaign data according to name
 exports.delete = (req, res) => {
   const compaign = compaignService.find(req.params.name);
 

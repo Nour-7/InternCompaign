@@ -2,6 +2,7 @@
 const joi = require('joi');
 const request = require('request');
 
+// validate on the compaign schema
 function validateCompaign(compaign) {
   const schema = {
     name: joi.string().min(2).required(),

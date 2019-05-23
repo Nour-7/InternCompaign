@@ -1,5 +1,6 @@
 const compaignService = require('../services/compaignService');
 
+// Group compaigns data with dimentions
 function groupBy(xs, key) {
   return xs.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -7,6 +8,7 @@ function groupBy(xs, key) {
   }, {});
 }
 
+// Preparing report data
 exports.getReportData = (req, res) => {
   const compaigns = compaignService.getAll();
   if (Object.keys(req.query).length === 0 && req.query.constructor === Object) return res.send(compaigns);
@@ -14,6 +16,7 @@ exports.getReportData = (req, res) => {
   const { fields } = req.query;
   const { duration } = req.query;
 
+  // Only show the wanted fields
   function getFields(g) {
     const groupKeys = Object.keys(g);
     const fieldArray = fields.split(',');
@@ -29,7 +32,6 @@ exports.getReportData = (req, res) => {
     });
     return g;
   }
-  // const picked = (({ fields }) => ({ fields }))(compaigns);
 
   const grouped = getFields(groupBy(compaigns, dimensions));
   console.log(grouped);

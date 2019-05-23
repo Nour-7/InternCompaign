@@ -1,5 +1,7 @@
+// Getting data from JSON file
 const compaigns = require('../dataStore.js');
 
+// Functions for data manipulation
 module.exports = {
   add(compaign) {
     compaigns.push(compaign);
