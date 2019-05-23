@@ -21,6 +21,7 @@ exports.add = (req, res) => {
 
   res.status(200).send('Created successfully');
 };
+
 exports.getByName = (req, res) => {
   const compaign = compaignService.find(req.params.name);
 
