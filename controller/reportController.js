@@ -9,12 +9,10 @@ function groupBy(xs, key) {
 
 exports.getReportData = (req, res) => {
   const compaigns = compaignService.getAll();
-
+  if (Object.keys(req.query).length === 0 && req.query.constructor === Object) return res.send(compaigns);
   const { dimensions } = req.query;
   const { fields } = req.query;
   const { duration } = req.query;
-  console.log(req.query);
-
 
   function getFields(g) {
     const groupKeys = Object.keys(g);
