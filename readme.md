@@ -25,7 +25,10 @@ npm run lint
 
 * **URL**
 
-  http://localhost:3000
+http://localhost:3000/api/compaigns
+http://localhost:3000/api/compaigns/:name
+http://localhost:3000/api/reportData
+http://localhost:3000/report
 
 * **Usage:**
 
@@ -43,5 +46,9 @@ npm run lint
   -POST new data  POST request in this route /api/compaign
 
   -Update date with spicific name via PUT request in this route /api/compaign/:name
+  
+  -To view report charter via PUT request in this route /api/report
+
+
 
  
