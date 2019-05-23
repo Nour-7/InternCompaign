@@ -2,7 +2,7 @@ const express = require('express');
 const compaignController = require('./controller/compaignController');
 const reportController = require('./controller/reportController');
 
-// Using express.js 
+// Using express.js
 const app = express();
 app.use(express.json());
 

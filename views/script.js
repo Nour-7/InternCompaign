@@ -1,8 +1,10 @@
 // Using chart.js to draw report chart
 // here *labels* are dynamic from the json data provided by the /api/reportData
 // But the *dataset* here is static
+// eslint-disable-next-line no-unused-vars
 function renderChart(data) {
-  const massPopChart = new Chart(myChart, {
+  // eslint-disable-next-line no-undef
+  return new Chart(myChart, {
     type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
     data: {
       labels: Object.keys(data),

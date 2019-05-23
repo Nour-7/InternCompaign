@@ -11,9 +11,12 @@ function groupBy(xs, key) {
 // Preparing report data
 exports.getReportData = (req, res) => {
   const compaigns = compaignService.getAll();
-  if (Object.keys(req.query).length === 0 && req.query.constructor === Object) return res.send(compaigns);
+  if (Object.keys(req.query).length === 0
+    && req.query.constructor === Object) return res.send(compaigns);
   const { dimensions } = req.query;
   const { fields } = req.query;
+  // Did not understant what is ment by duration
+  // eslint-disable-next-line no-unused-vars
   const { duration } = req.query;
 
   // Only show the wanted fields
@@ -34,6 +37,5 @@ exports.getReportData = (req, res) => {
   }
 
   const grouped = getFields(groupBy(compaigns, dimensions));
-  console.log(grouped);
   res.send(grouped);
 };
